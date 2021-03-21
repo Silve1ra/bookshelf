@@ -13,26 +13,75 @@
 
     ul {
       list-style: none;
+      width: 300px;
+    }
+
+    li {
+      clear: both;
+    }
+
+    li button {
+      background-color: transparent;
+      border: none;
+      outline: none;
+      color: red;
+      float: right;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .lists-wrapper, .todos-wrapper {
+      display: inline-block;
+      vertical-align: top;
     }
   </style>
 
 </head>
 <body>
+  <div class="lists-wrapper">
+    <ul id="lists">
+      {% for list in lists %}
+      <li>
+        <a href="/lists/{{ list.id }}">{{ list.name }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
 
-  <form id="form">
-    <input type="text" id="description" name="description">
-    <input type="submit" value="Create">
-  </form>
-
-  <div id="error" class="hidden">Something went wrong!</div>
-
-  <ul id="todos">
-    {% for d in data %}
-    <li><input class="check-completed" data-id="{{ d.id }}" type="checkbox" {% if d.completed %} checked {% endif %}>{{ d.description }}</li>
-    {% endfor %}
-  </ul>
-
+  <div class="todos-wrapper">
+    <h4>{{ active_list.name }}</h4>
+    <form id="form">
+      <input type="text" id="description" name="description">
+      <input type="submit" value="Create">
+    </form>
+  
+    <div id="error" class="hidden">Something went wrong!</div>
+  
+    <ul id="todos">
+      {% for todo in todos %}
+      <li>
+        <input class="check-completed" data-id="{{ todo.id }}" type="checkbox" {% if todo.completed %} checked {% endif %}>
+          {{ todo.description }}
+        <button class="delete-button" data-id="{{ todo.id }}">&cross;</button>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  
   <script>
+    // delete
+    const deleteBtns = document.querySelectorAll('.delete-button');
+    for (let i = 0; i < deleteBtns.length; i++) {
+      const btn = deleteBtns[i];
+      btn.onclick = function(e) {
+        const todoId = e.target.dataset['id'];
+        fetch('/todos/' + todoId, {
+          method: 'DELETE'
+        });
+      }
+    }
+
+    // update
     const checkboxes = document.querySelectorAll('.check-completed')
     for (let i = 0; i < checkboxes.length; i++){
       const checkbox = checkboxes[i]
@@ -59,6 +108,7 @@
       }
     }
 
+    // create
     document.getElementById('form').onsubmit = function(e) {
       e.preventDefault();  // prevent from full page refresh
       fetch('/todos/create', {
