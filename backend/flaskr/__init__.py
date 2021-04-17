@@ -1,3 +1,8 @@
+"""
+    $env:FLASK_APP='app'
+    $env:FLASK_ENV='development'
+"""
+
 import os
 from flask import Flask, request, abort, jsonify
 from flask_sqlalchemy import SQLAlchemy
@@ -57,6 +62,27 @@ def create_app(test_config=None):
                 'book': book.format(),
             })
 
+    # uma rota separada para search com POST quebra o create
+    # @app.route('/books', methods=['POST'])
+    # def search():
+    #     body = request.get_json()
+    #     search = body.get('search', None)
+
+    #     try:
+    #         selection = Book.query.order_by(Book.id).filter(Book.title.ilike('%{}%'.format(search)))
+    #         current_books = paginate_books(request, selection)
+
+    #         return jsonify({
+    #             'success': True,
+    #             'books': current_books,
+    #             'total_books': len(selection.all())
+    #         })
+
+    #     except:
+    #         abort(422)
+            
+    
+    
     @app.route('/books', methods=['POST'])
     def store():
         body = request.get_json()
@@ -65,19 +91,32 @@ def create_app(test_config=None):
         new_author = body.get('author', None)
         new_rating = body.get('rating', None)
 
+        search = body.get('search', None)
+
         try:
-            book = Book(title=new_title, author=new_author, rating=new_rating)
-            book.insert()
+            if search: # if there's a search on post
+                selection = Book.query.order_by(Book.id).filter(Book.title.ilike('%{}%'.format(search)))
+                current_books = paginate_books(request, selection)
 
-            selection = Book.query.order_by(Book.id).all()
-            current_books = paginate_books(request, selection)
+                return jsonify({
+                    'success': True,
+                    'books': current_books,
+                    'total_books': len(selection.all())
+                })
 
-            return jsonify({
-                'success': True,
-                'created': book.format(),
-                'books': current_books,
-                'total_books': len(Book.query.all())
-            })
+            else:
+                book = Book(title=new_title, author=new_author, rating=new_rating)
+                book.insert()
+
+                selection = Book.query.order_by(Book.id).all()
+                current_books = paginate_books(request, selection)
+
+                return jsonify({
+                    'success': True,
+                    'created': book.format(),
+                    'books': current_books,
+                    'total_books': len(Book.query.all())
+                })
 
         except:
             abort(422)
