@@ -1,4 +1,20 @@
-# Bookshelf
+<h4 align="center">
+  🚀 Bookshelf
+</h4>
+
+<p align="center">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/Silve1ra/bookshelf">
+  
+  <a href="https://github.com/Silve1ra/bookshelf/commits/main">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/Silve1ra/bookshelf">
+  </a>
+
+  <a href="https://github.com/Silve1ra/bookshelf/issues">
+    <img alt="Repository issues" src="https://img.shields.io/github/issues/Silve1ra/bookshelf">
+  </a>
+
+  <img alt="License" src="https://img.shields.io/badge/license-MIT-brightgreen">
+</p>
 
 This project is a virtual bookshelf. 
 All backend code follows [PEP8 style guidelines](https://www.python.org/dev/peps/pep-0008/). 
