@@ -1,3 +1,52 @@
+# Bookshelf
+
+This project is a virtual bookshelf. 
+All backend code follows [PEP8 style guidelines](https://www.python.org/dev/peps/pep-0008/). 
+
+## Getting Started
+
+### Pre-requisites and Local Development 
+Developers using this project should already have Python3, pip and node installed on their local machines.
+
+#### Backend
+
+To run the application run the following commands: 
+```
+export FLASK_APP=flaskr
+export FLASK_ENV=development
+flask run
+```
+or (Windows 10 PowerShell):
+```
+$env:FLASK_APP='flaskr'
+$env:FLASK_ENV='development'
+flask run
+```
+
+The application is run on `http://127.0.0.1:5000/` by default and is a proxy in the frontend configuration. 
+
+#### Frontend
+
+From the frontend folder, run the following commands to start the client: 
+```
+npm install // only once to install dependencies
+npm start 
+```
+
+By default, the frontend will run on localhost:3000. 
+
+### Tests
+In order to run tests navigate to the backend folder and run the following commands: 
+
+```
+flask db init
+flask db migrate
+flask db upgrade
+python test_flaskr.py
+```
+
+All tests are kept in that file and should be maintained as updates are made to app functionality. 
+
 ## API Reference
 
 ### Getting Started
@@ -165,3 +214,11 @@ The API will return three error types when requests fail:
   "success": true
 }
 ```
+
+## Deployment N/A
+
+## Authors
+Yours truly, Felipe Silveira 
+
+## Acknowledgements 
+The awesome Udacity Nanodegree helping me to be an extraordinary full stack developer! 
