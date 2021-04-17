@@ -218,7 +218,7 @@ The API will return three error types when requests fail:
 ## Deployment N/A
 
 ## Authors
-Yours truly, Felipe Silveira 
+Yours truly, <a href="https://github.com/Silve1ra"><b>Felipe Silveira</b> 
 
 ## Acknowledgements 
 The awesome Udacity Nanodegree helping me to be an extraordinary full stack developer! 
