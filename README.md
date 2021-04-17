@@ -3,7 +3,6 @@
 </h4>
 
 <p align="center">
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/Silve1ra/bookshelf">
   
   <a href="https://github.com/Silve1ra/bookshelf/commits/main">
     <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/Silve1ra/bookshelf">
