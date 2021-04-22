@@ -230,8 +230,6 @@ The API will return three error types when requests fail:
 }
 ```
 
-## Deployment N/A
-
 ## Authors
 Yours truly, <a href="https://github.com/Silve1ra"><b>Felipe Silveira</b> 
 
